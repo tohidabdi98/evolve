@@ -1,0 +1,9 @@
+node_modules
+dist
+coverage
+*.local
+.DS_Store
+*.log
+
+# Freebuff workspace metadata
+.freebuff/

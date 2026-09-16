@@ -1,0 +1,213 @@
+/* Shell: tab bar, onboarding, placeholders */
+
+.tabbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  background: color-mix(in srgb, var(--bg-surface) 92%, transparent);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid var(--line-softer);
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+.tabbar__list {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  height: var(--nav-h);
+}
+
+.tabbar__tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  color: var(--ink-low);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  transition: color var(--dur-quick) var(--ease-soft);
+}
+
+.tabbar__tab--active {
+  color: var(--ink-high);
+}
+
+.tabbar__icon {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.tabbar__label {
+  letter-spacing: 0.02em;
+}
+
+/* ===== Onboarding ===== */
+
+.onboarding {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  max-width: var(--content-max);
+  width: 100%;
+  margin: 0 auto;
+  padding: var(--space-6) var(--space-4) var(--space-5);
+  gap: var(--space-5);
+}
+
+.onboarding__progress {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.onboarding__progress-dot {
+  height: 4px;
+  flex: 1;
+  border-radius: var(--radius-pill);
+  background: var(--line-soft);
+  transition: background var(--dur-warm) var(--ease-soft);
+}
+
+.onboarding__progress-dot--done {
+  background: #d9c9a3;
+}
+
+.onboarding__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  justify-content: center;
+}
+
+.onboarding__eyebrow {
+  color: var(--ink-low);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-weight: 700;
+}
+
+.onboarding__title {
+  font-size: var(--text-3xl);
+}
+
+.onboarding__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  align-items: stretch;
+}
+
+/* Aspect choice cards */
+
+.aspect-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+
+.aspect-card {
+  text-align: left;
+  border: 1px solid var(--line-softer);
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+  padding: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  transition:
+    border-color var(--dur-quick) var(--ease-soft),
+    transform var(--dur-quick) var(--ease-soft);
+}
+
+.aspect-card:hover {
+  transform: translateY(-1px);
+}
+
+.aspect-card--selected {
+  border-color: rgba(233, 216, 166, 0.7);
+  background: var(--bg-surface-raised);
+}
+
+.aspect-card__dot {
+  width: 0.85rem;
+  height: 0.85rem;
+  border-radius: 50%;
+  margin-bottom: var(--space-1);
+}
+
+.aspect-card__state {
+  margin-top: 2px;
+}
+
+.aspect-card__name {
+  font-weight: 700;
+  font-size: var(--text-sm);
+}
+
+.aspect-card__chakra {
+  font-size: var(--text-2xs);
+  color: var(--ink-low);
+  letter-spacing: 0.06em;
+}
+
+.aspect-card__essence {
+  font-size: var(--text-xs);
+  color: var(--ink-mid);
+}
+
+/* Option rows (rhythm, first action) */
+
+.option-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.option {
+  text-align: left;
+  border: 1px solid var(--line-softer);
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+  padding: var(--space-3) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  transition: border-color var(--dur-quick) var(--ease-soft);
+}
+
+.option:hover {
+  border-color: rgba(238, 243, 247, 0.22);
+}
+
+.option--selected {
+  border-color: rgba(233, 216, 166, 0.7);
+}
+
+.option__title {
+  font-weight: 700;
+  font-size: var(--text-sm);
+}
+
+.option__sub {
+  font-size: var(--text-xs);
+  color: var(--ink-mid);
+}
+
+/* ===== Placeholder (step 1) ===== */
+
+.placeholder {
+  border: 1px dashed var(--line-soft);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6) var(--space-4);
+  text-align: center;
+  color: var(--ink-low);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  align-items: center;
+}

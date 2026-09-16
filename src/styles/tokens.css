@@ -1,0 +1,92 @@
+/*
+ * Evolve design tokens (blueprint §7, §21).
+ * All visual semantics flow through this file — no hard-coded colors in components.
+ */
+
+:root {
+  /* ===== Seven aspect hues (§7.1) ===== */
+  /* Grounding — red; Creativity — orange; Agency — yellow; Connection — green;
+     Expression — blue; Reflection — indigo/violet; Meaning — violet/white */
+  --hue-grounding: 4;
+  --hue-creativity: 28;
+  --hue-agency: 46;
+  --hue-connection: 145;
+  --hue-expression: 210;
+  --hue-reflection: 255;
+  --hue-meaning: 290;
+
+  /* ===== Warmth model (§7.2): warmth 0..1 drives saturation & lightness ===== */
+  /* Faded = peaceful and dormant, never "bad" (§7.3): still tinted, still soft. */
+  --sat-floor: 26%;
+  --sat-ceiling: 78%;
+  --light-floor: 46%;
+  --light-ceiling: 66%;
+  --glow-alpha-floor: 0.08;
+  --glow-alpha-ceiling: 0.55;
+
+  /* ===== Dark cozy nature palette ===== */
+  --bg-deep: #0d1117;
+  --bg-world: #101418;
+  --bg-surface: #1a2027;
+  --bg-surface-raised: #212a33;
+  --ink-high: #eef3f7;
+  --ink-mid: #a9b6c2;
+  --ink-low: #71808d;
+  --ink-faint: #4a5764;
+  --line-soft: rgba(238, 243, 247, 0.09);
+  --line-softer: rgba(238, 243, 247, 0.05);
+  --focus-ring: #8fb8e8;
+
+  /* ===== Semantic ===== */
+  --danger: #e88074;
+  --danger-soft: rgba(232, 128, 116, 0.14);
+  --safe: #7fc99a;
+
+  /* ===== Type (§21.3): one expressive display face + readable UI face ===== */
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-ui: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --text-2xs: 0.6875rem;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-md: 1rem;
+  --text-lg: 1.1875rem;
+  --text-xl: 1.4375rem;
+  --text-2xl: 1.75rem;
+  --text-3xl: 2.25rem;
+
+  /* ===== Space ===== */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+
+  /* ===== Shape & motion (§21.2) ===== */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.875rem;
+  --radius-lg: 1.25rem;
+  --radius-pill: 999px;
+  --ease-soft: cubic-bezier(0.33, 1, 0.68, 1);
+  --dur-quick: 180ms;
+  --dur-warm: 450ms;
+  --dur-bloom: 800ms;
+
+  /* ===== Layout ===== */
+  --nav-h: 4rem;
+  --content-max: 30rem;
+  --content-max-wide: 46rem;
+  --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.35);
+
+  /* ===== Stage accents (§8.3) ===== */
+  --stage-dormant: #5d6a75;
+  --stage-seed: #8a7a5c;
+  --stage-sprout: #79a879;
+  --stage-established: #5db3a1;
+  --stage-flourishing: #6fa8dc;
+  --stage-radiant: #e9d8a6;
+}
+
+/* ===== Warmth-derived custom properties, set per aspect via inline style ===== */
+/* Usage: style={{ '--aspect-warmth': w }} on any element using aspect classes. */
