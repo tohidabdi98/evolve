@@ -204,6 +204,58 @@
   color: var(--ink-mid);
 }
 
+/* ===== Compact spine rows (step 4) ===== */
+
+.spine__orb--small {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  flex: none;
+  transition: box-shadow var(--dur-warm) var(--ease-soft), background var(--dur-warm) var(--ease-soft);
+}
+
+.spine__row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-1) 0;
+}
+
+.spine__labels {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.spine__name {
+  font-weight: 600;
+  font-size: var(--text-sm);
+}
+
+.spine__sub {
+  font-size: var(--text-2xs);
+  color: var(--ink-low);
+}
+
+.spine__state {
+  font-size: var(--text-xs);
+  color: var(--ink-low);
+  white-space: nowrap;
+}
+
+.spine {
+  display: flex;
+  flex-direction: column;
+}
+
+.spine-panel {
+  border: 1px solid var(--line-softer);
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+  padding: var(--space-2) var(--space-3);
+}
+
 /* ===== Placeholder (step 1) ===== */
 
 .placeholder {

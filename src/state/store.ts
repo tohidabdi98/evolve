@@ -225,6 +225,7 @@ export const useEvolve = create<EvolveStore>()(
     }),
     {
       name: 'evolve-store-v1',
+      version: 1,
       partialize: (state) => {
         // Persist data only — actions are recreated on load.
         const {
