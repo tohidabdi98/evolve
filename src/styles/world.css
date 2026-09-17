@@ -118,3 +118,17 @@
   text-transform: uppercase;
   margin-top: var(--space-3);
 }
+
+/* ===== Dev preview panel (step 2) ===== */
+
+.devpanel__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+}
+
+.devpanel__btn {
+  font-size: var(--text-xs);
+  padding: 0.5em 0.7em;
+}
