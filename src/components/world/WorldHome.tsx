@@ -1,7 +1,7 @@
 import { ASPECTS } from '@/domain/aspects';
-import { STAGES } from '@/lib/color';
+import { STAGES, stageForEnergy } from '@/lib/color';
 import { useEvolve } from '@/state/store';
-import { stageForEnergy } from '@/lib/color';
+import DevPanel from './DevPanel';
 
 /** Placeholder home: the seven aspects along the body's axis. Replaced/extended in step 4. */
 export default function WorldHome({ onNavigate }: { onNavigate: (tab: 'log' | 'me') => void }) {
@@ -51,7 +51,7 @@ export default function WorldHome({ onNavigate }: { onNavigate: (tab: 'log' | 'm
                   </span>
                 </div>
                 <span className="spine__state grow t-right" style={{ textAlign: 'right' }}>
-                  {stage} · {state.energy}/1000
+                  {stage} · {Math.round(state.energy)}/1000
                 </span>
               </div>
             );
@@ -59,6 +59,8 @@ export default function WorldHome({ onNavigate }: { onNavigate: (tab: 'log' | 'm
         </div>
         <p className="spine__caption">Crown ↑ · axis of attention · ↓ Root</p>
       </section>
+
+      <DevPanel />
 
       <button className="btn btn--primary btn--lg" onClick={() => onNavigate('log')}>
         ＋ I did something
