@@ -78,11 +78,41 @@ export function classifyBehavior(text: string): Classification {
   };
 }
 
-/** Suggest an effort level from text cues (duration words, "quick", etc.). */
-export function suggestEffort(text: string, fallback: Effort = 'light'): Effort {
+/**
+ * Effort from time spent — the only effort signal the UI asks for (§6.2).
+ * The user says *what* they did and *about how long*; the engine handles
+ * everything else. Sub-linear bands: bigger time helps more, but not linearly.
+ */
+export function effortFromMinutes(minutes?: number): Effort {
+  if (minutes == null || Number.isNaN(minutes) || minutes <= 0) return 'light';
+  if (minutes < 5) return 'tiny';
+  if (minutes < 15) return 'light';
+  if (minutes < 40) return 'moderate';
+  return 'substantial';
+}
+
+/** Prefill a sensible duration for catalog quick picks (inverse of the bands). */
+export function minutesForEffort(effort: Effort): number {
+  switch (effort) {
+    case 'tiny':
+      return 3;
+    case 'light':
+      return 10;
+    case 'moderate':
+      return 25;
+    case 'substantial':
+      return 60;
+  }
+}
+
+/** Pull "20 min", "an hour", "half an hour" etc. out of free text. */
+export function parseMinutesFromText(text: string): number | undefined {
   const norm = normalize(text);
-  if (/\b(quick|tiny|small|minute|one|glass|brief)\b/.test(norm)) return 'tiny';
-  if (/\b(hour|hours|long|deep|big|major|finally)\b/.test(norm)) return 'moderate';
-  if (/\b(all day|marathon|intense|huge)\b/.test(norm)) return 'substantial';
-  return fallback;
+  const mins = norm.match(/(\d+)\s*(?:mins?|minutes?)\b/);
+  if (mins) return Number(mins[1]);
+  const hrs = norm.match(/(\d+(?:\.\d+)?)\s*(?:h|hrs?|hours?)\b/);
+  if (hrs) return Math.round(Number(hrs[1]) * 60);
+  if (/\bhalf (?:an )?hour\b/.test(norm)) return 30;
+  if (/\b(?:an|one) hour\b/.test(norm)) return 60;
+  return undefined;
 }

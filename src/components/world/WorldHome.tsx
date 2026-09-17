@@ -2,7 +2,6 @@ import { ASPECTS } from '@/domain/aspects';
 import { STAGES, STAGE_THRESHOLDS, stageForEnergy, aspectColor } from '@/lib/color';
 import { useEvolve } from '@/state/store';
 import WorldScene from './WorldScene';
-import DevPanel from './DevPanel';
 
 /**
  * Home: the living world (blueprint §8). The scene carries the emotion;
@@ -71,8 +70,6 @@ export default function WorldHome({ onNavigate }: { onNavigate: (tab: 'log' | 'm
           })}
         </div>
       </section>
-
-      <DevPanel />
 
       <button className="btn btn--primary btn--lg" onClick={() => onNavigate('log')}>
         ＋ I did something

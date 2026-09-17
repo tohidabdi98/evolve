@@ -232,5 +232,5 @@ function stageChangeMessage(aspect: AspectId, stage: ReturnType<typeof stageForE
     reflection: { Sprout: 'A quiet pool is forming.', Established: 'The lanterns burn steady.' },
     meaning: { Sprout: 'The sky feels a little closer.', Established: 'Constellations are taking shape.' },
   };
-  return lines[aspect][stage] ?? `Something changed here — ${stage.toLowerCase()} energy in ${aspect}.`;
+  return lines[aspect][stage] ?? `${aspect[0].toUpperCase()}${aspect.slice(1)} entered ${stage} — a quiet shift.`;
 }

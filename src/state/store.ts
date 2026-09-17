@@ -14,6 +14,7 @@ import type {
 } from '@/domain/types';
 import { ASPECT_IDS, zeroWeights } from '@/domain/types';
 import { applyBehavior, clampEnergy, updateMomentum } from '@/domain/growthEngine';
+import { effortFromMinutes } from '@/domain/classifier';
 
 function freshAspects(): Record<
   AspectId,
@@ -57,10 +58,12 @@ export const INITIAL_STATE: EvolveState = {
 export interface LogBehaviorInput {
   title: string;
   notes?: string;
-  effort: Effort;
+  /** Optional explicit override; otherwise derived from time spent (§6.2). */
+  effort?: Effort;
   aspectWeights: AspectWeights;
   mappingSource: Behavior['mappingSource'];
   source?: Behavior['source'];
+  /** About how long, in minutes — the user's only "size" input. */
   durationMinutes?: number;
   /** Optional reflection to attach in the same motion. */
   reflectionPromptId?: string;
@@ -78,7 +81,10 @@ export interface EvolveStore extends EvolveState {
   /** Log a behavior through the growth engine (§30). */
   logBehavior: (input: LogBehaviorInput) => void;
   /** Edit an existing behavior; the whole world is recalculated deterministically (§28). */
-  editBehavior: (id: string, patch: Partial<Pick<Behavior, 'title' | 'effort' | 'aspectWeights' | 'notes'>>) => void;
+  editBehavior: (
+    id: string,
+    patch: Partial<Pick<Behavior, 'title' | 'effort' | 'aspectWeights' | 'notes' | 'durationMinutes'>>,
+  ) => void;
   /** Delete a behavior and remove its contribution (§28, §32). */
   deleteBehavior: (id: string) => void;
   saveReflection: (promptId: string, prompt: string, response: string) => void;
@@ -141,7 +147,7 @@ export const useEvolve = create<EvolveStore>()(
           source: input.source ?? 'manual',
           timestamp: now,
           durationMinutes: input.durationMinutes,
-          effort: input.effort,
+          effort: input.effort ?? effortFromMinutes(input.durationMinutes),
           aspectWeights: input.aspectWeights,
           mappingSource: input.mappingSource,
           userConfirmed: true,
@@ -181,7 +187,12 @@ export const useEvolve = create<EvolveStore>()(
 
       editBehavior: (id, patch) => {
         set((s) => {
-          const behaviors = s.behaviors.map((b) => (b.id === id ? { ...b, ...patch } : b));
+          // Time spent is authoritative: re-derive effort unless explicitly overridden.
+          const applied =
+            patch.effort == null && patch.durationMinutes !== undefined
+              ? { ...patch, effort: effortFromMinutes(patch.durationMinutes) }
+              : patch;
+          const behaviors = s.behaviors.map((b) => (b.id === id ? { ...b, ...applied } : b));
           const { aspects, events } = recalculateAll(behaviors, s.onboarding.focusAspects);
           return { behaviors, aspects, evolutionEvents: [...events, ...s.evolutionEvents].slice(0, 100) };
         });

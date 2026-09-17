@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { classifyBehavior, suggestEffort } from './classifier';
+import { classifyBehavior, effortFromMinutes } from './classifier';
 import { suggestNextAction, weeklySummaryLines } from './recommendations';
 import { ASPECT_IDS, zeroWeights } from './types';
 
@@ -24,8 +24,12 @@ describe('classifier (§5.1B)', () => {
     expect(ASPECT_IDS.every((a) => c.weights[a] === 0)).toBe(true);
   });
 
-  it('suggests tiny effort for quick language', () => {
-    expect(suggestEffort('quick glass of water')).toBe('tiny');
+  it('derives effort from time spent (§6.2 bands)', () => {
+    expect(effortFromMinutes(3)).toBe('tiny');
+    expect(effortFromMinutes(10)).toBe('light');
+    expect(effortFromMinutes(30)).toBe('moderate');
+    expect(effortFromMinutes(90)).toBe('substantial');
+    expect(effortFromMinutes(undefined)).toBe('light');
   });
 });
 
