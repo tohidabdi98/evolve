@@ -83,6 +83,12 @@
   justify-content: center;
 }
 
+.onboarding__body--center {
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
 .onboarding__eyebrow {
   color: var(--ink-low);
   font-size: var(--text-xs);

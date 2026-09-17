@@ -9,6 +9,8 @@ export interface AspectDef {
   id: AspectId;
   /** Modern, human name — the default voice (§36). */
   name: string;
+  /** Adjective voice used on onboarding choice cards (§3.1 screen 2). */
+  focusName: string;
   chakraName: string;
   /** Short poetic quality used on cards and onboarding. */
   essence: string;
@@ -24,6 +26,7 @@ export const ASPECTS: readonly AspectDef[] = [
   {
     id: 'grounding',
     name: 'Grounding',
+    focusName: 'Grounded',
     chakraName: 'Muladhara',
     essence: 'Steady, rested, resourced',
     description: 'Sleep, food, money, home base, and the routines that hold you up.',
@@ -33,6 +36,7 @@ export const ASPECTS: readonly AspectDef[] = [
   {
     id: 'creativity',
     name: 'Creativity',
+    focusName: 'Creative',
     chakraName: 'Svadhisthana',
     essence: 'Playful, flowing, alive',
     description: 'Play, art, music, and making things without a scoreboard.',
@@ -42,6 +46,7 @@ export const ASPECTS: readonly AspectDef[] = [
   {
     id: 'agency',
     name: 'Agency',
+    focusName: 'Driven',
     chakraName: 'Manipura',
     essence: 'Capable, moving, ignited',
     description: 'Exercise, finishing things, starting the thing you postponed.',
@@ -51,6 +56,7 @@ export const ASPECTS: readonly AspectDef[] = [
   {
     id: 'connection',
     name: 'Connection',
+    focusName: 'Connected',
     chakraName: 'Anahata',
     essence: 'Warm, open, together',
     description: 'People, kindness, gratitude, quality time, being shown up for.',
@@ -60,6 +66,7 @@ export const ASPECTS: readonly AspectDef[] = [
   {
     id: 'expression',
     name: 'Expression',
+    focusName: 'Expressive',
     chakraName: 'Vishuddha',
     essence: 'Honest, clear, heard',
     description: 'Saying the true thing, writing, speaking, listening well.',
@@ -69,6 +76,7 @@ export const ASPECTS: readonly AspectDef[] = [
   {
     id: 'reflection',
     name: 'Reflection',
+    focusName: 'Clear-minded',
     chakraName: 'Ajna',
     essence: 'Clear-minded, aware',
     description: 'Attention, meditation, reading, and pauses without a screen.',
@@ -78,6 +86,7 @@ export const ASPECTS: readonly AspectDef[] = [
   {
     id: 'meaning',
     name: 'Meaning',
+    focusName: 'Purposeful',
     chakraName: 'Sahasrara',
     essence: 'Purposeful, spacious',
     description: 'Values, perspective, and the long view of what matters.',
